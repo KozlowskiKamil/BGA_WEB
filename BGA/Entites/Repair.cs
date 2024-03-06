@@ -1,4 +1,6 @@
-﻿namespace BGA.Entites
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BGA.Entites
 {
     public class Repair
     {
@@ -24,6 +26,8 @@
 
         public string RepairMethod { get; set; }
 
+
+        [DataType(DataType.Date)]
         public DateTime LocalDate { get; set; }
     }
 }
