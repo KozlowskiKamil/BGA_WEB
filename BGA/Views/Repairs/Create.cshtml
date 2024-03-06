@@ -20,7 +20,6 @@
                             <div class="form-group">
                                 <label asp-for="Client" class="control-label"></label>
                                 <select asp-for="Client" class="form-control" id="client">
-                                    <option value="">-- Select Client --</option>
                                     <option value="ALSTOM">ALSTOM</option>
                                     <option value="AXIS">AXIS</option>
                                     <option value="Bosch">Bosch</option>
@@ -33,22 +32,55 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="TesterProcess" class="control-label"></label>
-                                <input asp-for="TesterProcess" class="form-control" id="testerProcess" />
+                                <select asp-for="TesterProcess" class="form-control" id="testerProcess">
+                                    <option value="AOI">AOI</option>
+                                    <option value="PROGRAMATOR">PRG</option>
+                                    <option value="FVT">FVT</option>
+                                    <option value="ICT">ICT</option>
+                                    <option value="ISOLATION_MCP">Izolacja MCP</option>
+                                    <option value="ISOLATION_ACP">Izolacja ACP</option>
+                                    <option value="X_RAY_AUTOMAT">X-ray Automat</option>
+                                    <option value="BOX_BUILD">BB</option>
+                                    <option value="BGA">BGA</option>
+                                </select>
                                 <span asp-validation-for="TesterProcess" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Defect" class="control-label"></label>
-                                <input asp-for="Defect" class="form-control" id="defect" />
+                                <select asp-for="Defect" class="form-control" id="defect">
+                                    <option value="UNSOLDEREDI">Niezalutowany</option>
+                                    <option value="SHORT_CIRCUI">Zwarcie</option>
+                                    <option value="RAISED">Podniesiony</option>
+                                    <option value="VOIDS_IN_THE_SOLDER">Pustki w lutowiu</option>
+                                    <option value="DEFECTIVE">Wadliwy</option>
+                                    <option value="CONNECTION_PROBLEM">Problem z połączeniem</option>
+                                    <option value="SOFTWARE_PROBLEM">Problem z oprogramowaniem</option>
+                                    <option value="DAMAGED">Uszkodzony</option>
+                                    <option value="MOVED">Przesunięty</option>
+                                    <option value="ADDITIONAL_COMPONENT">Dodatkowy komponent</option>
+                                    <option value="BURNT">Spalony</option>
+                                    <option value="ELECTRICALLY_DEFECTIVE">Wadliwy elektrycznie</option>
+                                    <option value="LACK">Brak</option>
+                                </select>
                                 <span asp-validation-for="Defect" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="RepairMethod" class="control-label"></label>
-                                <input asp-for="RepairMethod" class="form-control" id="repairMethod" />
+                                <select asp-for="RepairMethod" class="form-control" id="repairMethod">
+                                    <option value="COMPONENT_REPLACEMENT">Wymiana komponentu</option>
+                                    <option value="SOLDERING_COMPONENTS">Lutowanie komponentu</option>
+                                    <option value="COMPONENT_REMOVAL">Usunięcie komponentu</option>
+                                </select>
                                 <span asp-validation-for="RepairMethod" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Machine" class="control-label"></label>
-                                <input asp-for="Machine" class="form-control" id="machine" />
+                                <select asp-for="Machine" class="form-control" id="machine">
+                                    <option value="SUMMIT_1800">Summit 1800</option>
+                                    <option value="SUMMIT_1100">Summit 1100</option>
+                                    <option value="FINETECH_183">Finetech 183</option>
+                                    <option value="FINETECH_CORE">Finetech core</option>
+                                </select>
                                 <span asp-validation-for="Machine" class="text-danger"></span>
                             </div>
                             <br />
@@ -101,85 +133,85 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-            $(document).ready(function () {
-                $('#saveButton').click(function () {
-                    submitForm(); // Wywołaj funkcję wysyłania formularza
-                });
+        $(document).ready(function () {
+            $('#saveButton').click(function () {
+                submitForm(); // Wywołaj funkcję wysyłania formularza
+            });
 
-                $('#repairForm').submit(function (event) {
-                    event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
-                    submitForm(); // Wywołaj funkcję wysyłania formularza
-                });
+            $('#repairForm').submit(function (event) {
+                event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
+                submitForm(); // Wywołaj funkcję wysyłania formularza
+            });
 
-                // Funkcja wysyłająca formularz
-                function submitForm() {
-                    // Sprawdzanie, czy pola wymagane są wypełnione
-                    if ($('#serialNumber').val() === '' || $('#defect').val() === '' || $('#locationComponent').val() === '' || $('#testerProcess').val() === '' || $('#machine').val() === '' || $('#localDate').val() === '' || $('#name').val() === '' || $('#client').val() === '' || $('#analysis').val() === '' || $('#repairMethod').val() === '') {
-                        alert("Wypełnij wszystkie wymagane pola formularza!");
-                        return;
-                    }
-
-                    // Zapisywanie danych do localStorage
-                    localStorage.setItem('defect', $('#defect').val());
-                    localStorage.setItem('name', $('#name').val());
-                    localStorage.setItem('client', $('#client').val());
-                    localStorage.setItem('testerProcess', $('#testerProcess').val());
-                    localStorage.setItem('machine', $('#machine').val());
-                    localStorage.setItem('analysis', $('#analysis').val());
-                    localStorage.setItem('repairMethod', $('#repairMethod').val());
-                    localStorage.setItem('localDate', $('#localDate').val());
-                    localStorage.setItem('locationComponent', $('#locationComponent').val());
-
-                    // Wysyłanie danych za pomocą AJAX
-                    $.ajax({
-                        type: 'POST',
-                        url: '/Repairs/Create',
-                        data: $('#repairForm').serialize(),
-                        success: function (response) {
-                            $('.scrollable-table tbody').append(response);
-                            location.reload();
-                        },
-                        error: function (xhr, status, error) {
-                            window.location.href = '/add';
-                        }
-                    });
+            // Funkcja wysyłająca formularz
+            function submitForm() {
+                // Sprawdzanie, czy pola wymagane są wypełnione
+                if ($('#serialNumber').val() === '' || $('#defect').val() === '' || $('#locationComponent').val() === '' || $('#testerProcess').val() === '' || $('#machine').val() === '' || $('#localDate').val() === '' || $('#name').val() === '' || $('#client').val() === '' || $('#analysis').val() === '' || $('#repairMethod').val() === '') {
+                    alert("Wypełnij wszystkie wymagane pola formularza!");
+                    return;
                 }
 
-                $('#repairForm input').keypress(function (event) {
-                    // Sprawdź, czy wciśnięto klawisz Enter
-                    if (event.which === 13) {
-                        event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
-                        submitForm(); // Wywołaj funkcję wysyłania formularza
+                // Zapisywanie danych do localStorage
+                localStorage.setItem('defect', $('#defect').val());
+                localStorage.setItem('name', $('#name').val());
+                localStorage.setItem('client', $('#client').val());
+                localStorage.setItem('testerProcess', $('#testerProcess').val());
+                localStorage.setItem('machine', $('#machine').val());
+                localStorage.setItem('analysis', $('#analysis').val());
+                localStorage.setItem('repairMethod', $('#repairMethod').val());
+                localStorage.setItem('localDate', $('#localDate').val());
+                localStorage.setItem('locationComponent', $('#locationComponent').val());
+
+                // Wysyłanie danych za pomocą AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/Repairs/Create',
+                    data: $('#repairForm').serialize(),
+                    success: function (response) {
+                        $('.scrollable-table tbody').append(response);
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        window.location.href = '/Repairs/add';
                     }
                 });
+            }
 
-                $('#repairForm').submit(function (event) {
-            event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
-            submitForm(); // Wywołaj funkcję wysyłania formularza
-        });
-
-
-                // Pobieranie danych z localStorage i wypełnianie pól formularza
-                var defect = localStorage.getItem('defect');
-                var name = localStorage.getItem('name');
-                var client = localStorage.getItem('client');
-                var testerProcess = localStorage.getItem('testerProcess');
-                var machine = localStorage.getItem('machine');
-                var analysis = localStorage.getItem('analysis');
-                var repairMethod = localStorage.getItem('repairMethod');
-                var localDate = localStorage.getItem('localDate');
-                var locationComponent = localStorage.getItem('locationComponent');
-
-                if (defect) $('#defect').val(defect);
-                if (name) $('#name').val(name);
-                if (client) $('#client').val(client);
-                if (testerProcess) $('#testerProcess').val(testerProcess);
-                if (machine) $('#machine').val(machine);
-                if (analysis) $('#analysis').val(analysis);
-                if (repairMethod) $('#repairMethod').val(repairMethod);
-                if (localDate) $('#localDate').val(localDate);
-                if (locationComponent) $('#locationComponent').val(locationComponent);
+            $('#repairForm input').keypress(function (event) {
+                // Sprawdź, czy wciśnięto klawisz Enter
+                if (event.which === 13) {
+                    event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
+                    submitForm(); // Wywołaj funkcję wysyłania formularza
+                }
             });
+
+            $('#repairForm').submit(function (event) {
+        event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
+        submitForm(); // Wywołaj funkcję wysyłania formularza
+    });
+
+
+            // Pobieranie danych z localStorage i wypełnianie pól formularza
+            var defect = localStorage.getItem('defect');
+            var name = localStorage.getItem('name');
+            var client = localStorage.getItem('client');
+            var testerProcess = localStorage.getItem('testerProcess');
+            var machine = localStorage.getItem('machine');
+            var analysis = localStorage.getItem('analysis');
+            var repairMethod = localStorage.getItem('repairMethod');
+            var localDate = localStorage.getItem('localDate');
+            var locationComponent = localStorage.getItem('locationComponent');
+
+            if (defect) $('#defect').val(defect);
+            if (name) $('#name').val(name);
+            if (client) $('#client').val(client);
+            if (testerProcess) $('#testerProcess').val(testerProcess);
+            if (machine) $('#machine').val(machine);
+            if (analysis) $('#analysis').val(analysis);
+            if (repairMethod) $('#repairMethod').val(repairMethod);
+            if (localDate) $('#localDate').val(localDate);
+            if (locationComponent) $('#locationComponent').val(locationComponent);
+        });
 </script>
 
 @section Scripts {
