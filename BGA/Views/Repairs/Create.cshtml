@@ -13,12 +13,12 @@
                     <div class="row my-3">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label asp-for="LocalDate" class="control-label"></label>
+                                <label asp-for="LocalDate" class="control-label">Data</label>
                                 <input asp-for="LocalDate" class="form-control" id="localDate" />
                                 <span asp-validation-for="LocalDate" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Client" class="control-label"></label>
+                                <label asp-for="Client" class="control-label">Klient</label>
                                 <select asp-for="Client" class="form-control" id="client">
                                     <option value="ALSTOM">ALSTOM</option>
                                     <option value="AXIS">AXIS</option>
@@ -31,7 +31,7 @@
                                 <span asp-validation-for="Client" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="TesterProcess" class="control-label"></label>
+                                <label asp-for="TesterProcess" class="control-label">Tester / proces</label>
                                 <select asp-for="TesterProcess" class="form-control" id="testerProcess">
                                     <option value="AOI">AOI</option>
                                     <option value="PROGRAMATOR">PRG</option>
@@ -46,7 +46,7 @@
                                 <span asp-validation-for="TesterProcess" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Defect" class="control-label"></label>
+                                <label asp-for="Defect" class="control-label">Przyczyna wymiany</label>
                                 <select asp-for="Defect" class="form-control" id="defect">
                                     <option value="UNSOLDEREDI">Niezalutowany</option>
                                     <option value="SHORT_CIRCUI">Zwarcie</option>
@@ -65,7 +65,7 @@
                                 <span asp-validation-for="Defect" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="RepairMethod" class="control-label"></label>
+                                <label asp-for="RepairMethod" class="control-label">Sposób naprawy</label>
                                 <select asp-for="RepairMethod" class="form-control" id="repairMethod">
                                     <option value="COMPONENT_REPLACEMENT">Wymiana komponentu</option>
                                     <option value="SOLDERING_COMPONENTS">Lutowanie komponentu</option>
@@ -74,7 +74,7 @@
                                 <span asp-validation-for="RepairMethod" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Machine" class="control-label"></label>
+                                <label asp-for="Machine" class="control-label">Maszyna</label>
                                 <select asp-for="Machine" class="form-control" id="machine">
                                     <option value="SUMMIT_1800">Summit 1800</option>
                                     <option value="SUMMIT_1100">Summit 1100</option>
@@ -90,32 +90,32 @@
                                 </button>
                                 </div>*@
                             <div class="form-group">
-                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <input type="submit" value="Zatwierdź" class="btn btn-primary" />
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label asp-for="Name" class="control-label"></label>
+                                <label asp-for="Name" class="control-label">Imie nazwisko</label>
                                 <input asp-for="Name" class="form-control" id="name" />
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Analysis" class="control-label"></label>
+                                <label asp-for="Analysis" class="control-label">Osoba analizująca</label>
                                 <input asp-for="Analysis" class="form-control" id="analysis" />
                                 <span asp-validation-for="Analysis" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="LocationComponent" class="control-label"></label>
+                                <label asp-for="LocationComponent" class="control-label">Pozycja</label>
                                 <input asp-for="LocationComponent" class="form-control" id="locationComponent" />
                                 <span asp-validation-for="LocationComponent" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Comment" class="control-label"></label>
+                                <label asp-for="Comment" class="control-label">Komentarz</label>
                                 <input asp-for="Comment" class="form-control" id="comment" />
                                 <span asp-validation-for="Comment" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="SerialNumber" class="control-label"></label>
+                                <label asp-for="SerialNumber" class="control-label">Numer seryjny</label>
                                 <input asp-for="SerialNumber" class="form-control" id="serialNumber" required />
                                 <span asp-validation-for="SerialNumber" class="text-danger"></span>
                             </div>
@@ -134,9 +134,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
         $(document).ready(function () {
-            $('#saveButton').click(function () {
-                submitForm(); // Wywołaj funkcję wysyłania formularza
-            });
+           // $('#saveButton').click(function () {
+           //     submitForm(); // Wywołaj funkcję wysyłania formularza
+            //});
 
             $('#repairForm').submit(function (event) {
                 event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
@@ -187,7 +187,7 @@
 
             $('#repairForm').submit(function (event) {
         event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
-        submitForm(); // Wywołaj funkcję wysyłania formularza
+       // submitForm(); // Wywołaj funkcję wysyłania formularza
     });
 
 
