@@ -1,12 +1,3 @@
 {
-  "dependencies": {
-    "secrets1": {
-      "type": "secrets.user"
-    },
-    "mssql2": {
-      "secretStore": "LocalSecretsFile",
-      "type": "mssql.onprem",
-      "connectionId": "BGA"
-    }
-  }
+  "dependencies": {}
 }

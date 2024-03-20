@@ -18,7 +18,7 @@ namespace BGA.Migrations
                     SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Analysis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LocationComponent = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Defect = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Client = table.Column<string>(type: "nvarchar(max)", nullable: false),

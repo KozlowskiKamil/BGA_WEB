@@ -12,7 +12,7 @@ namespace BGA.Entites
 
         public string Analysis { get; set; }
 
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         public string LocationComponent { get; set; }
 
