@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -15,8 +15,9 @@ html {
 
 body {
   margin-bottom: 60px;
-}
-/*
+}*/
+
+
 body {
     background-color: #f6f8fb;
     color: #003d6bff;
@@ -109,5 +110,6 @@ ul.list-group li.active2 {
     text-align: center;
 }
 
-.table
-*/
+.form-group {
+    margin: 15px;
+}
