@@ -51,20 +51,47 @@ namespace BGA.Controllers
         }
 
         // POST: Repairs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate")] Repair repair)
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate")] Repair repair)
+{
+    if (ModelState.IsValid)
+    {
+        // Sprawdzenie, czy suma napraw nie przekracza 8
+        if (!CountRepairs(repair))
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(repair);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            _context.Add(repair);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        else
+        {
+            ModelState.AddModelError(string.Empty, "Suma napraw dla danego numeru seryjnego przekracza 8.");
             return View(repair);
         }
+    }
+    return View(repair);
+}
+
+        // Metoda do zliczania napraw dla danego numeru seryjnego
+        private bool CountRepairs(Repair newRepair)
+        {
+            var repairList = _context.Repair
+                .Where(r => r.SerialNumber == newRepair.SerialNumber)
+                .ToList();
+
+            var countReplacement = repairList
+                .Count(repair => repair.RepairMethod == "COMPONENT_REPLACEMENT");
+
+            var countSoldering = repairList
+                .Count(repair => repair.RepairMethod == "SOLDERING_COMPONENTS");
+
+            var countRemoval = repairList
+                .Count(repair => repair.RepairMethod == "COMPONENT_REMOVAL");
+
+            return countRemoval + countSoldering + (countReplacement * 2) >= 8;
+        }
+
 
         // GET: Repairs/Edit/5
         public async Task<IActionResult> Edit(long? id)
