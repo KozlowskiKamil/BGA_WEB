@@ -18,12 +18,31 @@ namespace BGA.Controllers
             _context = context;
         }
 
+
+
+        // POST: Repairs/Add
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate")] Repair repair)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(repair);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(repair);
+        }
+
+
         // GET: Repairs
         public async Task<IActionResult> Index()
         {
-              return _context.Repair != null ? 
-                          View(await _context.Repair.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Repair'  is null.");
+            return _context.Repair != null ?
+                        View(await _context.Repair.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Repair'  is null.");
         }
 
         // GET: Repairs/Details/5
@@ -50,28 +69,34 @@ namespace BGA.Controllers
             return View();
         }
 
-        // POST: Repairs/Create
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate")] Repair repair)
-{
-    if (ModelState.IsValid)
-    {
-        // Sprawdzenie, czy suma napraw nie przekracza 8
-        if (!CountRepairs(repair))
+        // GET: Repairs/Add
+        public IActionResult Add()
         {
-            _context.Add(repair);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View();
         }
-        else
+
+        // POST: Repairs/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate")] Repair repair)
         {
-            ModelState.AddModelError(string.Empty, "Suma napraw dla danego numeru seryjnego przekracza 8.");
+            if (ModelState.IsValid)
+            {
+                // Sprawdzenie, czy suma napraw nie przekracza 8
+                if (!CountRepairs(repair))
+                {
+                    _context.Add(repair);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Suma napraw dla danego numeru seryjnego przekracza 8.");
+                    throw new Exception("Suma napraw dla danego numeru seryjnego przekracza 8."); // Rzucenie wyjątku
+                }
+            }
             return View(repair);
         }
-    }
-    return View(repair);
-}
 
         // Metoda do zliczania napraw dla danego numeru seryjnego
         private bool CountRepairs(Repair newRepair)
@@ -176,14 +201,14 @@ public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Com
             {
                 _context.Repair.Remove(repair);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RepairExists(long id)
         {
-          return (_context.Repair?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Repair?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -28,4 +28,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Repairs}/{action=Create}/{id?}");
 
+
+app.MapControllerRoute(
+    name: "repairs",
+    pattern: "Repairs/{action=Create}/{id?}",
+    defaults: new { controller = "Repairs", action = "Create" });
+
+
 app.Run();
