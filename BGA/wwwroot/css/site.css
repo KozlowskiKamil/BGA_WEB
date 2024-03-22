@@ -1,4 +1,4 @@
-/*html {
+html {
   font-size: 14px;
 }
 
@@ -15,10 +15,14 @@ html {
 
 body {
   margin-bottom: 60px;
-}*/
+}
+
+ul.list-group li.active2 {
+    background-color: #d41212;
+}
 
 
-body {
+/*body {
     background-color: #f6f8fb;
     color: #003d6bff;
     font-family: 'Lato', sans-serif;
@@ -112,4 +116,4 @@ ul.list-group li.active2 {
 
 .form-group {
     margin: 15px;
-}
+}*/
