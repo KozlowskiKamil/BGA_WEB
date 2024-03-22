@@ -4,92 +4,100 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Lista napraw</h1>
+<h1>Historia napraw</h1>
 
 <p>
     <a asp-action="Create">Dodaj nowyą naprawe</a>
 </p>
+
+<form method="get" asp-action="FilterBySerialNumber" asp-controller="Repairs">
+    <label for="serialNumber">Skanuj numer seryjny:</label>
+    <input type="text" name="serialNumber" id="serialNumber">
+    <button type="submit">Szukaj</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SerialNumber)
+                Numer seryjny
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Imie nazwisko
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Analysis)
+                Osoba analizująca
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Comment)
+                Pozycja
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LocationComponent)
+                Przyczyna wymiany
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Defect)
+                Klient
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Client)
+                Tester / proces
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TesterProcess)
+                Maszyna
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Machine)
+                Sposób naprawy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RepairMethod)
+                Komentarz
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LocalDate)
+                Data
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SerialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Analysis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocationComponent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Defect)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TesterProcess)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Machine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RepairMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocalDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Analysis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationComponent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Defect)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TesterProcess)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Machine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RepairMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalDate)
+                </td>
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>*@
+            </tr>
+        }
     </tbody>
 </table>

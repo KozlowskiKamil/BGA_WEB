@@ -36,6 +36,14 @@ namespace BGA.Controllers
             return View(repair);
         }
 
+        [HttpGet]
+        public IActionResult Exists(string serialNumber)
+        {
+            var exists = _context.Repair.Any(r => r.SerialNumber == serialNumber);
+            return Json(new { exists = exists });
+        }
+
+
 
         // GET: Repairs
         public async Task<IActionResult> Index()
@@ -44,6 +52,15 @@ namespace BGA.Controllers
                         View(await _context.Repair.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Repair'  is null.");
         }
+
+        [HttpGet]
+        public IActionResult FilterBySerialNumber(string serialNumber)
+        {
+            var repairs = _context.Repair.Where(r => r.SerialNumber == serialNumber).ToList();
+            return View("Index", repairs);
+        }
+
+
 
         // GET: Repairs/Details/5
         public async Task<IActionResult> Details(long? id)
