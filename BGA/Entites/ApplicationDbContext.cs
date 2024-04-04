@@ -17,8 +17,8 @@ namespace BGA.Entites
             //optionsBuilder.UseSqlServer("Server=ysql-kamil.alwaysdata.net;Database=kamil_printer;Integrated Security=True;User ID=kamil;Password=;");       
             //optionsBuilder.UseSqlServer("Server=PLKWIM0SQLV02B\\ENG;Database=TE_CPK;Integrated Security=True;User ID=neumannp;Password=;");
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Bga;Trusted_Connection=True");
-            //optionsBuilder.UseSqlServer("Server = PLKWIM0SQLV02B\\ENG; Database = TE_CPK; Integrated Security = True; User ID = JABIL\\smckwi_bgaprd$");
+            //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Bga;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Server = PLKWIM0SQLV02B\\ENG; Database = TE_CPK; Integrated Security = True; User ID = JABIL\\smckwi_bgaprd$");
             base.OnConfiguring(optionsBuilder);
         }
     }

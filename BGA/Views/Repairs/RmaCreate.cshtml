@@ -1,0 +1,248 @@
+﻿@model BGA.Entites.Repair
+
+
+<div class="container p-4">
+    <div class="row my-3">
+        <div class="col-md-12 col-12">
+            <div class="tile2">
+                <ul class="list-group">
+                    <li class="list-group-item active" aria-current="true">Wymiana BGA</li>
+                </ul>
+                <form asp-action="Create" id="repairForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row my-3">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label asp-for="LocalDate" class="control-label">Data</label>
+                                <input asp-for="LocalDate" class="form-control" id="localDate" />
+                                <span asp-validation-for="LocalDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Client" class="control-label">Klient</label>
+                                <select asp-for="Client" class="form-control" id="client">
+                                    <option value="ALSTOM">ALSTOM</option>
+                                    <option value="AXIS">AXIS</option>
+                                    <option value="Bosch">Bosch</option>
+                                    <option value="BSH">BSH</option>
+                                    <option value="L_AND_G">L+G</option>
+                                    <option value="ENOVATES">Enovates</option>
+                                    <option value="EVBOX">EvBox</option>
+                                </select>
+                                <span asp-validation-for="Client" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TesterProcess" class="control-label">Tester / proces</label>
+                                <select asp-for="TesterProcess" class="form-control" id="testerProcess">
+                                    <option value="AOI">AOI</option>
+                                    <option value="PROGRAMATOR">PRG</option>
+                                    <option value="FVT">FVT</option>
+                                    <option value="ICT">ICT</option>
+                                    <option value="ISOLATION_MCP">Izolacja MCP</option>
+                                    <option value="ISOLATION_ACP">Izolacja ACP</option>
+                                    <option value="X_RAY_AUTOMAT">X-ray Automat</option>
+                                    <option value="X_RAY_MANUAL">X-ray Manual</option>
+                                    <option value="BOX_BUILD">BB</option>
+                                    <option value="BGA">BGA</option>
+                                    <option value="RMA">RMA</option>
+                                </select>
+                                <span asp-validation-for="TesterProcess" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Defect" class="control-label">Przyczyna wymiany</label>
+                                <select asp-for="Defect" class="form-control" id="defect">
+                                    <option value="UNSOLDEREDI">Niezalutowany</option>
+                                    <option value="SHORT_CIRCUI">Zwarcie</option>
+                                    <option value="RAISED">Podniesiony</option>
+                                    <option value="VOIDS_IN_THE_SOLDER">Pustki w lutowiu</option>
+                                    <option value="DEFECTIVE">Wadliwy</option>
+                                    <option value="CONNECTION_PROBLEM">Problem z połączeniem</option>
+                                    <option value="SOFTWARE_PROBLEM">Problem z oprogramowaniem</option>
+                                    <option value="DAMAGED">Uszkodzony</option>
+                                    <option value="MOVED">Przesunięty</option>
+                                    <option value="ADDITIONAL_COMPONENT">Dodatkowy komponent</option>
+                                    <option value="BURNT">Spalony</option>
+                                    <option value="ELECTRICALLY_DEFECTIVE">Wadliwy elektrycznie</option>
+                                    <option value="LACK">Brak</option>
+                                </select>
+                                <span asp-validation-for="Defect" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="RepairMethod" class="control-label">Sposób naprawy</label>
+                                <select asp-for="RepairMethod" class="form-control" id="repairMethod">
+                                    <option value="COMPONENT_REPLACEMENT">Wymiana komponentu</option>
+                                    <option value="SOLDERING_COMPONENTS">Lutowanie komponentu</option>
+                                    <option value="COMPONENT_REMOVAL">Usunięcie komponentu</option>
+                                </select>
+                                <span asp-validation-for="RepairMethod" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Machine" class="control-label">Maszyna</label>
+                                <select asp-for="Machine" class="form-control" id="machine">
+                                    <option value="SUMMIT_1800">Summit 1800</option>
+                                    <option value="SUMMIT_1100">Summit 1100</option>
+                                    <option value="FINETECH_183">Finetech 183</option>
+                                    <option value="FINETECH_CORE">Finetech core</option>
+                                </select>
+                                <span asp-validation-for="Machine" class="text-danger"></span>
+                            </div>
+                            <br />
+                            @*<div class="ms-5">
+                                <button type="submit" class="btn btn-primary mb-3">
+                                Zatwierdź
+                                </button>
+                                </div>*@
+                            <div class="form-group">
+                                <input type="submit" value="Zatwierdź" class="btn btn-primary" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label">Imie nazwisko</label>
+                                <input asp-for="Name" class="form-control" id="name" required />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Analysis" class="control-label">Osoba analizująca</label>
+                                <input asp-for="Analysis" class="form-control" id="analysis" required />
+                                <span asp-validation-for="Analysis" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LocationComponent" class="control-label">Pozycja</label>
+                                <input asp-for="LocationComponent" class="form-control" id="locationComponent" required />
+                                <span asp-validation-for="LocationComponent" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Comment" class="control-label">Komentarz</label>
+                                <input asp-for="Comment" class="form-control" id="comment" />
+                                <span asp-validation-for="Comment" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SerialNumber" class="control-label">Numer seryjny</label>
+                                <input asp-for="SerialNumber" class="form-control" id="serialNumber" required />
+                                <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous">
+    </script>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+            $(document).ready(function () {
+               // $('#saveButton').click(function () {
+               //     submitForm(); // Wywołaj funkcję wysyłania formularza
+                //});
+
+                $('#repairForm').submit(function (event) {
+                    event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
+                    submitForm(); // Wywołaj funkcję wysyłania formularza
+                });
+
+                // Funkcja wysyłająca formularz
+    function submitForm() {
+        // Sprawdzanie, czy pola wymagane są wypełnione
+        if ($('#serialNumber').val() === '' || $('#defect').val() === '' || $('#locationComponent').val() === '' || $('#testerProcess').val() === '' || $('#machine').val() === '' || $('#localDate').val() === '' || $('#name').val() === '' || $('#client').val() === '' || $('#analysis').val() === '' || $('#repairMethod').val() === '') {
+            alert("Wypełnij wszystkie wymagane pola formularza!");
+            return;
+        }
+
+        // Sprawdzenie, czy numer seryjny już istnieje w bazie danych
+        var serialNumber = $('#serialNumber').val();
+        $.ajax({
+            type: 'GET',
+            url: '/Repairs/Exists?serialNumber=' + serialNumber,
+            success: function (response) {
+                if (response.exists) {
+                    var confirmed = confirm("Numer seryjny już istnieje w bazie danych. Czy na pewno chcesz dodać nowy rekord?");
+                    if (confirmed) {
+                        saveForm();
+                    }
+                } else {
+                    saveForm();
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Wystąpił błąd podczas sprawdzania istnienia numeru seryjnego w bazie danych.");
+            }
+        });
+    }
+
+    // Funkcja wysyłająca formularz po potwierdzeniu
+    function saveForm() {
+        // Zapisywanie danych do localStorage
+        localStorage.setItem('defect', $('#defect').val());
+        localStorage.setItem('name', $('#name').val());
+        localStorage.setItem('client', $('#client').val());
+        localStorage.setItem('testerProcess', $('#testerProcess').val());
+        localStorage.setItem('machine', $('#machine').val());
+        localStorage.setItem('analysis', $('#analysis').val());
+        localStorage.setItem('repairMethod', $('#repairMethod').val());
+        localStorage.setItem('localDate', $('#localDate').val());
+        localStorage.setItem('locationComponent', $('#locationComponent').val());
+
+        // Wysyłanie danych za pomocą AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/Repairs/Create',
+            data: $('#repairForm').serialize(),
+            success: function (response) {
+                $('.scrollable-table tbody').append(response);
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                window.location.href = '/Repairs/add';
+            }
+        });
+    }
+
+
+
+                $('#repairForm input').keypress(function (event) {
+                    // Sprawdź, czy wciśnięto klawisz Enter
+                    if (event.which === 13) {
+                        event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
+                        submitForm(); // Wywołaj funkcję wysyłania formularza
+                    }
+                });
+
+                $('#repairForm').submit(function (event) {
+            event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
+           // submitForm(); // Wywołaj funkcję wysyłania formularza
+        });
+
+
+                // Pobieranie danych z localStorage i wypełnianie pól formularza
+                var defect = localStorage.getItem('defect');
+                var name = localStorage.getItem('name');
+                var client = localStorage.getItem('client');
+                var testerProcess = localStorage.getItem('testerProcess');
+                var machine = localStorage.getItem('machine');
+                var analysis = localStorage.getItem('analysis');
+                var repairMethod = localStorage.getItem('repairMethod');
+                var localDate = localStorage.getItem('localDate');
+                var locationComponent = localStorage.getItem('locationComponent');
+
+                if (defect) $('#defect').val(defect);
+                if (name) $('#name').val(name);
+                if (client) $('#client').val(client);
+                if (testerProcess) $('#testerProcess').val(testerProcess);
+                if (machine) $('#machine').val(machine);
+                if (analysis) $('#analysis').val(analysis);
+                if (repairMethod) $('#repairMethod').val(repairMethod);
+                if (localDate) $('#localDate').val(localDate);
+                if (locationComponent) $('#locationComponent').val(locationComponent);
+            });
+</script>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

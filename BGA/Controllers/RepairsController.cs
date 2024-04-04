@@ -45,13 +45,27 @@ namespace BGA.Controllers
 
 
 
-        // GET: Repairs
+/*        // GET: Index
         public async Task<IActionResult> Index()
         {
             return _context.Repair != null ?
                         View(await _context.Repair.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Repair'  is null.");
+        }*/
+
+
+        // GET: Index
+        public async Task<IActionResult> Index()
+        {
+            var repairs = await _context.Repair
+                                        .OrderByDescending(r => r.Id)
+                                        .Take(500)
+                                        .ToListAsync();
+            return View(repairs);
         }
+
+
+
 
         [HttpGet]
         public IActionResult FilterBySerialNumber(string serialNumber)
