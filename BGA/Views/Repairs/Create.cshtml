@@ -13,11 +13,6 @@
                     <div class="row my-3">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label asp-for="LocalDate" class="control-label">Data</label>
-                                <input asp-for="LocalDate" class="form-control" id="localDate" />
-                                <span asp-validation-for="LocalDate" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
                                 <label asp-for="Client" class="control-label">Klient</label>
                                 <select asp-for="Client" class="form-control" id="client">
                                     <option value="ALSTOM">ALSTOM</option>
@@ -148,7 +143,7 @@
                 // Funkcja wysyłająca formularz
     function submitForm() {
         // Sprawdzanie, czy pola wymagane są wypełnione
-        if ($('#serialNumber').val() === '' || $('#defect').val() === '' || $('#locationComponent').val() === '' || $('#testerProcess').val() === '' || $('#machine').val() === '' || $('#localDate').val() === '' || $('#name').val() === '' || $('#client').val() === '' || $('#analysis').val() === '' || $('#repairMethod').val() === '') {
+        if ($('#serialNumber').val() === '' || $('#defect').val() === '' || $('#locationComponent').val() === '' || $('#testerProcess').val() === '' || $('#machine').val() === '' || $('#name').val() === '' || $('#client').val() === '' || $('#analysis').val() === '' || $('#repairMethod').val() === '') {
             alert("Wypełnij wszystkie wymagane pola formularza!");
             return;
         }
@@ -184,7 +179,6 @@
         localStorage.setItem('machine', $('#machine').val());
         localStorage.setItem('analysis', $('#analysis').val());
         localStorage.setItem('repairMethod', $('#repairMethod').val());
-        localStorage.setItem('localDate', $('#localDate').val());
         localStorage.setItem('locationComponent', $('#locationComponent').val());
 
         // Wysyłanie danych za pomocą AJAX
@@ -226,7 +220,6 @@
                 var machine = localStorage.getItem('machine');
                 var analysis = localStorage.getItem('analysis');
                 var repairMethod = localStorage.getItem('repairMethod');
-                var localDate = localStorage.getItem('localDate');
                 var locationComponent = localStorage.getItem('locationComponent');
 
                 if (defect) $('#defect').val(defect);
@@ -236,7 +229,6 @@
                 if (machine) $('#machine').val(machine);
                 if (analysis) $('#analysis').val(analysis);
                 if (repairMethod) $('#repairMethod').val(repairMethod);
-                if (localDate) $('#localDate').val(localDate);
                 if (locationComponent) $('#locationComponent').val(locationComponent);
             });
 </script>
