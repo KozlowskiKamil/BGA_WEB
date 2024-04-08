@@ -1,0 +1,60 @@
+﻿@model BGA.Entites.Rma
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Rma</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SerialNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.family)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.family)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Client)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.duration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.duration)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LocalDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LocalDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

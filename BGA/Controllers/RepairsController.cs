@@ -133,6 +133,7 @@ namespace BGA.Controllers
             return View(repair);
         }
 
+
         // Metoda do zliczania napraw dla danego numeru seryjnego
         private bool CountRepairs(Repair newRepair)
         {

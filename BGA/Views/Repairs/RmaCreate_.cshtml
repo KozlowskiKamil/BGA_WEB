@@ -8,24 +8,6 @@
                 <ul class="list-group">
                     <li class="list-group-item active" aria-current="true">RMA</li>
                 </ul>
-
-
-        public string serialNumber { get; set; }
-
-        public string lastName { get; set; }
-
-        public string family { get; set; }
-
-        public string? comment { get; set; }
-
-        public string client { get; set; }
-
-        public int duration { get; set; }
-        public DateTime localDate { get; set; }
-
-
-
-
                 <form asp-action="Create" id="repairForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row my-3">
