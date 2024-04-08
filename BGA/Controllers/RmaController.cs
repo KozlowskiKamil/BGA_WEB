@@ -55,10 +55,11 @@ namespace BGA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,family,Comment,Client,duration,LocalDate")] Rma rma)
+        public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,family,Comment,Client,duration")] Rma rma)
         {
             if (ModelState.IsValid)
             {
+                rma.LocalDate = DateTime.Now;
                 _context.Add(rma);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
