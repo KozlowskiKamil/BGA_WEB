@@ -7,7 +7,7 @@ namespace BGA.Entites
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Repair> Repair { get; set; }
-
+        public DbSet<Rma> Rma { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
