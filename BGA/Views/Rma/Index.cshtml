@@ -9,6 +9,13 @@
 <p>
     <a asp-action="Create">Dodaj RMA</a>
 </p>
+
+<form method="get" asp-action="FilterBySerialNumber" asp-controller="Rma">
+    <label for="serialNumber">Skanuj numer seryjny:</label>
+    <input type="text" name="serialNumber" id="serialNumber">
+    <button type="submit">Szukaj</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>

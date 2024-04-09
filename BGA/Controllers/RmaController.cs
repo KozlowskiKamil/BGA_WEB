@@ -18,13 +18,26 @@ namespace BGA.Controllers
             _context = context;
         }
 
-        // GET: Rma
+/*        // GET: Rma
         public async Task<IActionResult> Index()
         {
               return _context.Rma != null ? 
                           View(await _context.Rma.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Rma'  is null.");
+        }*/
+
+
+        // GET: Index
+        public async Task<IActionResult> Index()
+        {
+            var repairs = await _context.Rma
+                                        .OrderByDescending(r => r.Id)
+                                        .Take(500)
+                                        .ToListAsync();
+            return View(repairs);
         }
+
+
 
         // GET: Rma/Details/5
         public async Task<IActionResult> Details(long? id)
@@ -135,6 +148,21 @@ namespace BGA.Controllers
 
             return View(rma);
         }
+
+        [HttpGet]
+        public IActionResult Exists(string serialNumber)
+        {
+            var exists = _context.Rma.Any(r => r.SerialNumber == serialNumber);
+            return Json(new { exists = exists });
+        }
+
+        [HttpGet]
+        public IActionResult FilterBySerialNumber(string serialNumber)
+        {
+            var rma = _context.Rma.Where(r => r.SerialNumber == serialNumber).ToList();
+            return View("Index", rma);
+        }
+
 
         // POST: Rma/Delete/5
         [HttpPost, ActionName("Delete")]
