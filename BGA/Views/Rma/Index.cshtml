@@ -54,7 +54,33 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Client)
+                    @switch (item.Client)
+                    {
+                        case "ALSTOM":
+                            <text>ALSTOM</text>
+                            break;
+                        case "AXIS":
+                            <text>AXIS</text>
+                            break;
+                        case "Bosch":
+                            <text>Bosch</text>
+                            break;
+                        case "BSH":
+                            <text>BSH</text>
+                            break;
+                        case "L_AND_G":
+                            <text>L+G</text>
+                            break;
+                        case "ENOVATES":
+                            <text>Enovates</text>
+                            break;
+                        case "EVBOX":
+                            <text>EvBox</text>
+                            break;
+                        default:
+                            @Html.DisplayFor(modelItem => item.Client)
+                            break;
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.family)

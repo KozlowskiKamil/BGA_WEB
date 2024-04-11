@@ -45,17 +45,6 @@ namespace BGA.Controllers
             return Json(new { exists = exists });
         }
 
-
-
-/*        // GET: Index
-        public async Task<IActionResult> Index()
-        {
-            return _context.Repair != null ?
-                        View(await _context.Repair.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Repair'  is null.");
-        }*/
-
-
         // GET: Index
         public async Task<IActionResult> Index()
         {

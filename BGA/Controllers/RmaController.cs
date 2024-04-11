@@ -18,14 +18,6 @@ namespace BGA.Controllers
             _context = context;
         }
 
-/*        // GET: Rma
-        public async Task<IActionResult> Index()
-        {
-              return _context.Rma != null ? 
-                          View(await _context.Rma.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Rma'  is null.");
-        }*/
-
 
         // GET: Index
         public async Task<IActionResult> Index()
@@ -178,14 +170,14 @@ namespace BGA.Controllers
             {
                 _context.Rma.Remove(rma);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RmaExists(long id)
         {
-          return (_context.Rma?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Rma?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
