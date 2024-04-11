@@ -33,13 +33,13 @@
 
                     <div class="form-group">
                         <label asp-for="family" class="control-label">Rodzina</label>
-                        <input asp-for="family" class="form-control" id="family"/>
+                        <input asp-for="family" class="form-control" id="family" />
                         <span asp-validation-for="family" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="Name" class="control-label">Imie Nazwisko</label>
-                        <input asp-for="Name" class="form-control" id="name"/>
+                        <input asp-for="Name" class="form-control" id="name" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -73,17 +73,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-            $(document).ready(function () {
-               // $('#saveButton').click(function () {
-               //     submitForm(); // Wywołaj funkcję wysyłania formularza
-                //});
 
+    $(document).ready(function () {
                 $('#repairForm').submit(function (event) {
-                    event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
-                    submitForm(); // Wywołaj funkcję wysyłania formularza
+                    event.preventDefault();
+                    submitForm();
                 });
 
-                // Funkcja wysyłająca formularz
+    // Funkcja wysyłająca formularz
     function submitForm() {
         // Sprawdzanie, czy pola wymagane są wypełnione
         if ($('#serialNumber').val() === '' || $('#family').val() === '' || $('#name').val() === '' || $('#client').val() === '') {
@@ -134,9 +131,6 @@
             }
         });
     }
-
-
-
                 $('#repairForm input').keypress(function (event) {
                     // Sprawdź, czy wciśnięto klawisz Enter
                     if (event.which === 13) {
@@ -144,14 +138,9 @@
                         submitForm(); // Wywołaj funkcję wysyłania formularza
                     }
                 });
-
                 $('#repairForm').submit(function (event) {
-            event.preventDefault(); // Zapobiegaj domyślnej akcji formularza
-           // submitForm(); // Wywołaj funkcję wysyłania formularza
+            event.preventDefault();
         });
-
-
-                // Pobieranie danych z localStorage i wypełnianie pól formularza
                 var family = localStorage.getItem('family');
                 var name = localStorage.getItem('name');
                 var client = localStorage.getItem('client')
