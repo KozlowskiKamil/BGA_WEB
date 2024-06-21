@@ -126,7 +126,7 @@
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+@*<script>
 
     $(document).ready(function () {
                 $('#repairForm').submit(function (event) {
@@ -216,6 +216,103 @@
                 if (repairMethod) $('#repairMethod').val(repairMethod);
                 if (locationComponent) $('#locationComponent').val(locationComponent);
             });
+</script>
+*@
+<script>
+    $(document).ready(function () {
+        // Initialize or retrieve submission count
+        if (localStorage.getItem('submissionCount') === null) {
+            localStorage.setItem('submissionCount', 0);
+        }
+
+        $('#repairForm').submit(function (event) {
+            event.preventDefault();
+            submitForm();
+        });
+
+        function submitForm() {
+            if ($('#serialNumber').val() === '' || $('#defect').val() === '' || $('#locationComponent').val() === '' || $('#testerProcess').val() === '' || $('#machine').val() === '' || $('#name').val() === '' || $('#client').val() === '' || $('#analysis').val() === '' || $('#repairMethod').val() === '') {
+                alert("Wypełnij wszystkie wymagane pola formularza!");
+                return;
+            }
+            var serialNumber = $('#serialNumber').val();
+            $.ajax({
+                type: 'GET',
+                url: '/Repairs/Exists?serialNumber=' + serialNumber,
+                success: function (response) {
+                    if (response.exists) {
+                        var confirmed = confirm("Numer seryjny już istnieje w bazie danych. Czy na pewno chcesz dodać nowy rekord?");
+                        if (confirmed) {
+                            saveForm();
+                        }
+                    } else {
+                        saveForm();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Wystąpił błąd podczas sprawdzania istnienia numeru seryjnego w bazie danych.");
+                }
+            });
+        }
+
+        function saveForm() {
+            var submissionCount = parseInt(localStorage.getItem('submissionCount'));
+            submissionCount++;
+            localStorage.setItem('submissionCount', submissionCount);
+
+            if (submissionCount % 10 !== 0) {
+                localStorage.setItem('defect', $('#defect').val());
+                localStorage.setItem('name', $('#name').val());
+                localStorage.setItem('client', $('#client').val());
+                localStorage.setItem('testerProcess', $('#testerProcess').val());
+                localStorage.setItem('machine', $('#machine').val());
+                localStorage.setItem('analysis', $('#analysis').val());
+                localStorage.setItem('repairMethod', $('#repairMethod').val());
+                localStorage.setItem('locationComponent', $('#locationComponent').val());
+            } else {
+                localStorage.removeItem('client');
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/Repairs/Create',
+                data: $('#repairForm').serialize(),
+                success: function (response) {
+                    $('.scrollable-table tbody').append(response);
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    window.location.href = '/Repairs/add';
+                }
+            });
+        }
+
+        $('#repairForm input').keypress(function (event) {
+            if (event.which === 13) {
+                event.preventDefault();
+                submitForm();
+            }
+        });
+
+        // Populate form fields from localStorage
+        var defect = localStorage.getItem('defect');
+        var name = localStorage.getItem('name');
+        var client = localStorage.getItem('client');
+        var testerProcess = localStorage.getItem('testerProcess');
+        var machine = localStorage.getItem('machine');
+        var analysis = localStorage.getItem('analysis');
+        var repairMethod = localStorage.getItem('repairMethod');
+        var locationComponent = localStorage.getItem('locationComponent');
+
+        if (defect) $('#defect').val(defect);
+        if (name) $('#name').val(name);
+        if (client && parseInt(localStorage.getItem('submissionCount')) % 10 !== 0) $('#client').val(client);
+        if (testerProcess) $('#testerProcess').val(testerProcess);
+        if (machine) $('#machine').val(machine);
+        if (analysis) $('#analysis').val(analysis);
+        if (repairMethod) $('#repairMethod').val(repairMethod);
+        if (locationComponent) $('#locationComponent').val(locationComponent);
+    });
 </script>
 
 @section Scripts {
