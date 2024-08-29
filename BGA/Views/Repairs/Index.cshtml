@@ -1,246 +1,257 @@
 ﻿@model IEnumerable<BGA.Entites.Repair>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Historia BGA</h1>
+<div class="container p-4">
+    <div class="row my-3">
+        <div class="col-md-12 col-12">
+            <div class="tile2">
+                <ul class="list-group">
+                    <li class="list-group-item custom-bg-color" aria-current="true">RMA list</li>
+                </ul>
+                <div class="form-group">
+                    <form method="get" asp-action="FilterBySerialNumber" asp-controller="Repairs">
+                        <label for="serialNumber">Skanuj numer seryjny:</label>
+                        <input type="text" name="serialNumber" id="serialNumber">
+                        <button type="submit" class="btn custom-bt-color mt-2 mb-2">Szukaj</button>
+                    </form>
+                </div>
+                <div class="row my-3">
+@*                     <p>
+                        <a asp-action="Create">Dodaj nowyą naprawe</a>
+                    </p> *@
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Numer seryjny
+                                </th>
+                                <th>
+                                    Imie nazwisko
+                                </th>
+                                <th>
+                                    Osoba analizująca
+                                </th>
+                                <th>
+                                    Pozycja
+                                </th>
+                                <th>
+                                    Przyczyna wymiany
+                                </th>
+                                <th>
+                                    Klient
+                                </th>
+                                <th>
+                                    Tester / proces
+                                </th>
+                                <th>
+                                    Maszyna
+                                </th>
+                                <th>
+                                    Sposób naprawy
+                                </th>
+                                <th>
+                                    Komentarz
+                                </th>
+                                <th>
+                                    Data
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Analysis)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LocationComponent)
+                                    </td>
+                                    <td>
+                                        @switch (item.Defect)
+                                        {
+                                            case "UNSOLDEREDI":
+                                                <text>Niezalutowany</text>
+                                                break;
+                                            case "SHORT_CIRCUI":
+                                                <text>Zwarcie</text>
+                                                break;
+                                            case "RAISED":
+                                                <text>Podniesiony</text>
+                                                break;
+                                            case "VOIDS_IN_THE_SOLDER":
+                                                <text>Pustki w lutowiu</text>
+                                                break;
+                                            case "DEFECTIVE":
+                                                <text>Wadliwy</text>
+                                                break;
+                                            case "CONNECTION_PROBLEM":
+                                                <text>Problem z połączeniem</text>
+                                                break;
+                                            case "SOFTWARE_PROBLEM":
+                                                <text>Problem z oprogramowaniem</text>
+                                                break;
+                                            case "DAMAGED":
+                                                <text>Uszkodzony</text>
+                                                break;
+                                            case "MOVED":
+                                                <text>Przesunięty</text>
+                                                break;
+                                            case "ADDITIONAL_COMPONENT":
+                                                <text>Dodatkowy komponent</text>
+                                                break;
+                                            case "BURNT":
+                                                <text>Spalony</text>
+                                                break;
+                                            case "ELECTRICALLY_DEFECTIVE":
+                                                <text>Wadliwy elektrycznie</text>
+                                                break;
+                                            case "WRONG_POLARIZATION":
+                                                <text>Zła polaryzacja</text>
+                                                break;
+                                            case "LACK":
+                                                <text>Brak</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.Defect)
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (item.Client)
+                                        {
+                                            case "ALSTOM":
+                                                <text>ALSTOM</text>
+                                                break;
+                                            case "AXIS":
+                                                <text>AXIS</text>
+                                                break;
+                                            case "Bosch":
+                                                <text>Bosch</text>
+                                                break;
+                                            case "BSH":
+                                                <text>BSH</text>
+                                                break;
+                                            case "L_AND_G":
+                                                <text>L+G</text>
+                                                break;
+                                            case "ENOVATES":
+                                                <text>Enovates</text>
+                                                break;
+                                            case "EVBOX":
+                                                <text>EvBox</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.Client)
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (item.TesterProcess)
+                                        {
+                                            case "AOI":
+                                                <text>AOI</text>
+                                                break;
+                                            case "PROGRAMATOR":
+                                                <text>PRG</text>
+                                                break;
+                                            case "FVT":
+                                                <text>FVT</text>
+                                                break;
+                                            case "ICT":
+                                                <text>ICT</text>
+                                                break;
+                                            case "ISOLATION_MCP":
+                                                <text>Izolacja MCP</text>
+                                                break;
+                                            case "ISOLATION_ACP":
+                                                <text>Izolacja ACP</text>
+                                                break;
+                                            case "X_RAY_AUTOMAT":
+                                                <text>X-ray Automat</text>
+                                                break;
+                                            case "X_RAY_MANUAL":
+                                                <text>X-ray Manual</text>
+                                                break;
+                                            case "BOX_BUILD":
+                                                <text>BB</text>
+                                                break;
+                                            case "BGA":
+                                                <text>BGA</text>
+                                                break;
+                                            case "RMA":
+                                                <text>RMA</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.TesterProcess)
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (item.Machine)
+                                        {
+                                            case "SUMMIT_1800":
+                                                <text>Summit 1800</text>
+                                                break;
+                                            case "SUMMIT_1100":
+                                                <text>Summit 1100</text>
+                                                break;
+                                            case "FINETECH_183":
+                                                <text>Finetech 183</text>
+                                                break;
+                                            case "FINETECH_CORE":
+                                                <text>Finetech core</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.Machine)
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (item.RepairMethod)
+                                        {
+                                            case "COMPONENT_REPLACEMENT":
+                                                <text>Wymiana komponentu</text>
+                                                break;
+                                            case "SOLDERING_COMPONENTS":
+                                                <text>Lutowanie komponentu</text>
+                                                break;
+                                            case "COMPONENT_REMOVAL":
+                                                <text>Usunięcie komponentu</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.RepairMethod)
+                                                break;
+                                        }
+                                    </td>
 
-<p>
-    <a asp-action="Create">Dodaj nowyą naprawe</a>
-</p>
-
-<form method="get" asp-action="FilterBySerialNumber" asp-controller="Repairs">
-    <label for="serialNumber">Skanuj numer seryjny:</label>
-    <input type="text" name="serialNumber" id="serialNumber">
-    <button type="submit">Szukaj</button>
-</form>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Numer seryjny
-            </th>
-            <th>
-                Imie nazwisko
-            </th>
-            <th>
-                Osoba analizująca
-            </th>
-            <th>
-                Pozycja
-            </th>
-            <th>
-                Przyczyna wymiany
-            </th>
-            <th>
-                Klient
-            </th>
-            <th>
-                Tester / proces
-            </th>
-            <th>
-                Maszyna
-            </th>
-            <th>
-                Sposób naprawy
-            </th>
-            <th>
-                Komentarz
-            </th>
-            <th>
-                Data
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SerialNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Analysis)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LocationComponent)
-                </td>
-                <td>
-                    @switch (item.Defect)
-                    {
-                        case "UNSOLDEREDI":
-                            <text>Niezalutowany</text>
-                            break;
-                        case "SHORT_CIRCUI":
-                            <text>Zwarcie</text>
-                            break;
-                        case "RAISED":
-                            <text>Podniesiony</text>
-                            break;
-                        case "VOIDS_IN_THE_SOLDER":
-                            <text>Pustki w lutowiu</text>
-                            break;
-                        case "DEFECTIVE":
-                            <text>Wadliwy</text>
-                            break;
-                        case "CONNECTION_PROBLEM":
-                            <text>Problem z połączeniem</text>
-                            break;
-                        case "SOFTWARE_PROBLEM":
-                            <text>Problem z oprogramowaniem</text>
-                            break;
-                        case "DAMAGED":
-                            <text>Uszkodzony</text>
-                            break;
-                        case "MOVED":
-                            <text>Przesunięty</text>
-                            break;
-                        case "ADDITIONAL_COMPONENT":
-                            <text>Dodatkowy komponent</text>
-                            break;
-                        case "BURNT":
-                            <text>Spalony</text>
-                            break;
-                        case "ELECTRICALLY_DEFECTIVE":
-                            <text>Wadliwy elektrycznie</text>
-                            break;
-                        case "WRONG_POLARIZATION":
-                            <text>Zła polaryzacja</text>
-                            break;
-                        case "LACK":
-                            <text>Brak</text>
-                            break;
-                        default:
-                            @Html.DisplayFor(modelItem => item.Defect)
-                            break;
-                    }
-                </td>
-                <td>
-                    @switch (item.Client)
-                    {
-                        case "ALSTOM":
-                            <text>ALSTOM</text>
-                            break;
-                        case "AXIS":
-                            <text>AXIS</text>
-                            break;
-                        case "Bosch":
-                            <text>Bosch</text>
-                            break;
-                        case "BSH":
-                            <text>BSH</text>
-                            break;
-                        case "L_AND_G":
-                            <text>L+G</text>
-                            break;
-                        case "ENOVATES":
-                            <text>Enovates</text>
-                            break;
-                        case "EVBOX":
-                            <text>EvBox</text>
-                            break;
-                        default:
-                            @Html.DisplayFor(modelItem => item.Client)
-                            break;
-                    }
-                </td>
-                <td>
-                    @switch (item.TesterProcess)
-                    {
-                        case "AOI":
-                            <text>AOI</text>
-                            break;
-                        case "PROGRAMATOR":
-                            <text>PRG</text>
-                            break;
-                        case "FVT":
-                            <text>FVT</text>
-                            break;
-                        case "ICT":
-                            <text>ICT</text>
-                            break;
-                        case "ISOLATION_MCP":
-                            <text>Izolacja MCP</text>
-                            break;
-                        case "ISOLATION_ACP":
-                            <text>Izolacja ACP</text>
-                            break;
-                        case "X_RAY_AUTOMAT":
-                            <text>X-ray Automat</text>
-                            break;
-                        case "X_RAY_MANUAL":
-                            <text>X-ray Manual</text>
-                            break;
-                        case "BOX_BUILD":
-                            <text>BB</text>
-                            break;
-                        case "BGA":
-                            <text>BGA</text>
-                            break;
-                        case "RMA":
-                            <text>RMA</text>
-                            break;
-                        default:
-                            @Html.DisplayFor(modelItem => item.TesterProcess)
-                            break;
-                    }
-                </td>
-                <td>
-                    @switch (item.Machine)
-                    {
-                        case "SUMMIT_1800":
-                            <text>Summit 1800</text>
-                            break;
-                        case "SUMMIT_1100":
-                            <text>Summit 1100</text>
-                            break;
-                        case "FINETECH_183":
-                            <text>Finetech 183</text>
-                            break;
-                        case "FINETECH_CORE":
-                            <text>Finetech core</text>
-                            break;
-                        default:
-                            @Html.DisplayFor(modelItem => item.Machine)
-                            break;
-                    }
-                </td>
-                <td>
-                    @switch (item.RepairMethod)
-                    {
-                        case "COMPONENT_REPLACEMENT":
-                            <text>Wymiana komponentu</text>
-                            break;
-                        case "SOLDERING_COMPONENTS":
-                            <text>Lutowanie komponentu</text>
-                            break;
-                        case "COMPONENT_REMOVAL":
-                            <text>Usunięcie komponentu</text>
-                            break;
-                        default:
-                            @Html.DisplayFor(modelItem => item.RepairMethod)
-                            break;
-                    }
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LocalDate)
-                </td>
-@*                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>*@
-            </tr>
-        }
-    </tbody>
-</table>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Comment)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LocalDate)
+                                    </td>
+                                    @*                <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+</div>

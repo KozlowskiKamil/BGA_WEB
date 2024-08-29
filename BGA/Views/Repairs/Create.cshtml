@@ -1,12 +1,11 @@
 ﻿@model BGA.Entites.Repair
 
-
 <div class="container p-4">
     <div class="row my-3">
         <div class="col-md-12 col-12">
             <div class="tile2">
                 <ul class="list-group">
-                    <li class="list-group-item active" aria-current="true">Wymiana BGA</li>
+                    <li class="list-group-item custom-bg-color" aria-current="true">Wymiana BGA</li>
                 </ul>
                 <form asp-action="Create" id="repairForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -84,7 +83,7 @@
                             </div>
                             <br />
                             <div class="form-group">
-                                <input type="submit" value="Zatwierdź" class="btn btn-primary" />
+                                <input type="submit" value="Zatwierdź" class="btn custom-bt-color" />
                             </div>
                         </div>
                         <div class="col-md-6 col-12">

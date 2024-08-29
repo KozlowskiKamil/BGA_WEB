@@ -1,105 +1,113 @@
 ﻿@model IEnumerable<BGA.Entites.Rma>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Historia RMA</h1>
-
-<p>
-    <a asp-action="Create">Dodaj RMA</a>
-</p>
-
-<form method="get" asp-action="FilterBySerialNumber" asp-controller="Rma">
-    <label for="serialNumber">Skanuj numer seryjny:</label>
-    <input type="text" name="serialNumber" id="serialNumber">
-    <button type="submit">Szukaj</button>
-</form>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Numer seryjny
-            </th>
-            <th>
-                Imie nazwisko
-            </th>
-            <th>
-                Klient
-            </th>
-            <th>
-                Rodzina
-            </th>
-            <th>
-                Komentarz
-            </th>
-            <th>
-                Czas naprawy w minutach
-            </th>
-            <th>
-                Data
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SerialNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @switch (item.Client)
-                    {
-                        case "ALSTOM":
-                            <text>ALSTOM</text>
-                            break;
-                        case "AXIS":
-                            <text>AXIS</text>
-                            break;
-                        case "Bosch":
-                            <text>Bosch</text>
-                            break;
-                        case "BSH":
-                            <text>BSH</text>
-                            break;
-                        case "L_AND_G":
-                            <text>L+G</text>
-                            break;
-                        case "ENOVATES":
-                            <text>Enovates</text>
-                            break;
-                        case "EVBOX":
-                            <text>EvBox</text>
-                            break;
-                        default:
-                            @Html.DisplayFor(modelItem => item.Client)
-                            break;
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.family)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.duration)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LocalDate)
-                </td>
-                @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>*@
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container p-4">
+    <div class="row my-3">
+        <div class="col-md-12 col-12">
+            <div class="tile2">
+                <ul class="list-group">
+                    <li class="list-group-item custom-bg-color" aria-current="true">RMA list</li>
+                </ul>
+                <div class="form-group">
+                    <form method="get" asp-action="FilterBySerialNumber" asp-controller="Rma">
+                        <label for="serialNumber">Skanuj numer seryjny:</label>
+                        <input type="text" name="serialNumber" id="serialNumber">
+                        <button type="submit" class="btn custom-bt-color mt-2 mb-2">Szukaj</button>
+                    </form>
+                </div>
+                <div class="row my-3">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Numer seryjny
+                                </th>
+                                <th>
+                                    Imie nazwisko
+                                </th>
+                                <th>
+                                    Klient
+                                </th>
+                                <th>
+                                    Rodzina
+                                </th>
+                                <th>
+                                    Komentarz
+                                </th>
+                                <th>
+                                    Czas naprawy w minutach
+                                </th>
+                                <th>
+                                    Data
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @switch (item.Client)
+                                        {
+                                            case "ALSTOM":
+                                                <text>ALSTOM</text>
+                                                break;
+                                            case "AXIS":
+                                                <text>AXIS</text>
+                                                break;
+                                            case "Bosch":
+                                                <text>Bosch</text>
+                                                break;
+                                            case "BSH":
+                                                <text>BSH</text>
+                                                break;
+                                            case "L_AND_G":
+                                                <text>L+G</text>
+                                                break;
+                                            case "ENOVATES":
+                                                <text>Enovates</text>
+                                                break;
+                                            case "EVBOX":
+                                                <text>EvBox</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.Client)
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.family)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Comment)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.duration)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LocalDate)
+                                    </td>
+                                    @*<td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+</div>
