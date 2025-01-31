@@ -25,6 +25,8 @@ namespace BGA.Entites
         public string Machine { get; set; }
 
         public string RepairMethod { get; set; }
+        public string Pass { get; set; }
+        public string Fail { get; set; }
 
 
         [DataType(DataType.Date)]

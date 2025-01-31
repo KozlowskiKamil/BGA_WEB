@@ -8,7 +8,7 @@
                 <ul class="list-group">
                     <li class="list-group-item custom-bg-color" aria-current="true">Process Control</li>
                 </ul>
-                
+
                 <div class="form-group">
                     <form method="get" asp-action="FilterBySerialNumberControl" asp-controller="Repairs">
                         <label for="serialNumber" class="form-label">Skanuj numer seryjny:</label>
@@ -17,9 +17,6 @@
                     </form>
                 </div>
                 <div class="row my-3">
-@*                     <p>
-                        <a asp-action="Create">Dodaj nowyą naprawe</a>
-                    </p> *@
                     <table class="table">
                         <thead>
                             <tr>
@@ -29,9 +26,6 @@
                                 <th>
                                     Imie nazwisko
                                 </th>
-                                @* <th>
-                                    Osoba analizująca
-                                </th> *@
                                 <th>
                                     Pozycja
                                 </th>
@@ -41,12 +35,6 @@
                                 <th>
                                     Klient
                                 </th>
-                                @* <th>
-                                    Tester / proces
-                                </th>
-                                <th>
-                                    Maszyna
-                                </th> *@
                                 <th>
                                     Sposób naprawy
                                 </th>
@@ -56,7 +44,10 @@
                                 <th>
                                     Data
                                 </th>
-                                <th></th>
+                                <th>
+                                    Pass/Faill
+                                </th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,9 +60,6 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
-                                    @* <td>
-                                        @Html.DisplayFor(modelItem => item.Analysis)
-                                    </td> *@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.LocationComponent)
                                     </td>
@@ -154,67 +142,6 @@
                                                 break;
                                         }
                                     </td>
-                                    @* <td>
-                                        @switch (item.TesterProcess)
-                                        {
-                                            case "AOI":
-                                                <text>AOI</text>
-                                                break;
-                                            case "PROGRAMATOR":
-                                                <text>PRG</text>
-                                                break;
-                                            case "FVT":
-                                                <text>FVT</text>
-                                                break;
-                                            case "ICT":
-                                                <text>ICT</text>
-                                                break;
-                                            case "ISOLATION_MCP":
-                                                <text>Izolacja MCP</text>
-                                                break;
-                                            case "ISOLATION_ACP":
-                                                <text>Izolacja ACP</text>
-                                                break;
-                                            case "X_RAY_AUTOMAT":
-                                                <text>X-ray Automat</text>
-                                                break;
-                                            case "X_RAY_MANUAL":
-                                                <text>X-ray Manual</text>
-                                                break;
-                                            case "BOX_BUILD":
-                                                <text>BB</text>
-                                                break;
-                                            case "BGA":
-                                                <text>BGA</text>
-                                                break;
-                                            case "RMA":
-                                                <text>RMA</text>
-                                                break;
-                                            default:
-                                                @Html.DisplayFor(modelItem => item.TesterProcess)
-                                                break;
-                                        }
-                                    </td>
-                                    <td>
-                                        @switch (item.Machine)
-                                        {
-                                            case "SUMMIT_1800":
-                                                <text>Summit 1800</text>
-                                                break;
-                                            case "SUMMIT_1100":
-                                                <text>Summit 1100</text>
-                                                break;
-                                            case "FINETECH_183":
-                                                <text>Finetech 183</text>
-                                                break;
-                                            case "FINETECH_CORE":
-                                                <text>Finetech core</text>
-                                                break;
-                                            default:
-                                                @Html.DisplayFor(modelItem => item.Machine)
-                                                break;
-                                        }
-                                    </td> *@
                                     <td>
                                         @switch (item.RepairMethod)
                                         {
@@ -239,11 +166,27 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.LocalDate)
                                     </td>
-                                    @*                <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                </td>*@
+
+                                    <td>
+                                        @switch (item.Pass)
+                                        {
+                                            case "PASS":
+                                                <text>Pass</text>
+                                                break;
+                                            case "FAIL":
+                                                <text>Fail</text>
+                                                break;
+                                            default:
+                                                @Html.DisplayFor(modelItem => item.Pass)
+                                                break;
+                                        }
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="ControlEdit" asp-route-id="@item.Id" class="btn btn-warning mt-2 mb-2">Edit</a>
+                                        @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+                                    </td>
                                 </tr>
                             }
                         </tbody>

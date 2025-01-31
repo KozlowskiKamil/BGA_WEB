@@ -25,7 +25,7 @@ namespace BGA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod")] Repair repair)
+        public async Task<IActionResult> Add([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,Pass,Fail")] Repair repair)
         {
             if (ModelState.IsValid)
             {
@@ -83,6 +83,19 @@ namespace BGA.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult UpdatePass(int id, string pass)
+        {
+            var repair = _context.Repair.Find(id);
+            if (repair != null)
+            {
+                repair.Pass = pass;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Control");
+        }
+
+
 
         // GET: Repairs/Details/5
         public async Task<IActionResult> Details(long? id)
@@ -117,7 +130,7 @@ namespace BGA.Controllers
         // POST: Repairs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod")] Repair repair)
+        public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,Pass,Fail")] Repair repair)
         {
             if (ModelState.IsValid)
             {
@@ -176,12 +189,70 @@ namespace BGA.Controllers
             return View(repair);
         }
 
+        // GET: Repairs/Edit/5
+        public async Task<IActionResult> ControlEdit(long? id)
+        {
+            if (id == null || _context.Repair == null)
+            {
+                return NotFound();
+            }
+
+            var repair = await _context.Repair.FindAsync(id);
+            if (repair == null)
+            {
+                return NotFound();
+            }
+            return View(repair);
+        }
+
+
+
         // POST: Repairs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate")] Repair repair)
+        public async Task<IActionResult> ControlEdit(long id, [Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate,Pass,Fail")] Repair repair)
+        {
+            if (id != repair.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(repair);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RepairExists(repair.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Control));
+            }
+            return View(repair);
+        }
+
+
+
+
+
+
+        // POST: Repairs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(long id, [Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,LocalDate,Pass,Fail")] Repair repair)
         {
             if (id != repair.Id)
             {
