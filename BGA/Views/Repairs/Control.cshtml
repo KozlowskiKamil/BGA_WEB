@@ -6,10 +6,11 @@
         <div class="col-md-12 col-12">
             <div class="tile2">
                 <ul class="list-group">
-                    <li class="list-group-item custom-bg-color" aria-current="true">BGA list</li>
+                    <li class="list-group-item custom-bg-color" aria-current="true">Process Control</li>
                 </ul>
+                
                 <div class="form-group">
-                    <form method="get" asp-action="FilterBySerialNumber" asp-controller="Repairs">
+                    <form method="get" asp-action="FilterBySerialNumberControl" asp-controller="Repairs">
                         <label for="serialNumber" class="form-label">Skanuj numer seryjny:</label>
                         <input type="text" name="serialNumber" id="serialNumber" class="form-control" placeholder="S/N">
                         <button type="submit" class="btn custom-bt-color mt-2 mb-2">Szukaj</button>
@@ -28,9 +29,9 @@
                                 <th>
                                     Imie nazwisko
                                 </th>
-                                <th>
+                                @* <th>
                                     Osoba analizująca
-                                </th>
+                                </th> *@
                                 <th>
                                     Pozycja
                                 </th>
@@ -40,12 +41,12 @@
                                 <th>
                                     Klient
                                 </th>
-                                <th>
+                                @* <th>
                                     Tester / proces
                                 </th>
                                 <th>
                                     Maszyna
-                                </th>
+                                </th> *@
                                 <th>
                                     Sposób naprawy
                                 </th>
@@ -68,9 +69,9 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
-                                    <td>
+                                    @* <td>
                                         @Html.DisplayFor(modelItem => item.Analysis)
-                                    </td>
+                                    </td> *@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.LocationComponent)
                                     </td>
@@ -153,7 +154,7 @@
                                                 break;
                                         }
                                     </td>
-                                    <td>
+                                    @* <td>
                                         @switch (item.TesterProcess)
                                         {
                                             case "AOI":
@@ -213,7 +214,7 @@
                                                 @Html.DisplayFor(modelItem => item.Machine)
                                                 break;
                                         }
-                                    </td>
+                                    </td> *@
                                     <td>
                                         @switch (item.RepairMethod)
                                         {

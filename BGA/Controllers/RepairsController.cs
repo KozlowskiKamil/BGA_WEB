@@ -56,6 +56,16 @@ namespace BGA.Controllers
         }
 
 
+        // GET: Control
+        public async Task<IActionResult> Control()
+        {
+            var repairs = await _context.Repair
+                                        .OrderByDescending(r => r.Id)
+                                        .Take(500)
+                                        .ToListAsync();
+            return View(repairs);
+        }
+
 
 
         [HttpGet]
@@ -63,6 +73,13 @@ namespace BGA.Controllers
         {
             var repairs = _context.Repair.Where(r => r.SerialNumber == serialNumber).ToList();
             return View("Index", repairs);
+        }
+
+        [HttpGet]
+        public IActionResult FilterBySerialNumberControl(string serialNumber)
+        {
+            var repairs = _context.Repair.Where(r => r.SerialNumber == serialNumber).ToList();
+            return View("Control", repairs);
         }
 
 
