@@ -13,6 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="SerialNumber" class="control-label"></label>
                 <input asp-for="SerialNumber" class="form-control" />
@@ -28,11 +29,7 @@
                 <input asp-for="Analysis" class="form-control" />
                 <span asp-validation-for="Analysis" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Comment" class="control-label"></label>
-                <input asp-for="Comment" class="form-control" />
-                <span asp-validation-for="Comment" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="LocationComponent" class="control-label"></label>
                 <input asp-for="LocationComponent" class="form-control" />
@@ -67,6 +64,23 @@
                 <label asp-for="LocalDate" class="control-label"></label>
                 <input asp-for="LocalDate" class="form-control" />
                 <span asp-validation-for="LocalDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pass" class="control-label">Pass / Fail</label>
+                <select asp-for="Pass" class="form-control" id="Pass">
+                    <option value="PASS">Pass</option>
+                    <option value="FAIL">Fail</option>
+                </select>
+                <span asp-validation-for="Pass" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: none;">
+                <input type="hidden" asp-for="Fail" value="none" />
+                <span asp-validation-for="Fail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

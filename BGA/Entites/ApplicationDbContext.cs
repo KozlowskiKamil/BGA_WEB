@@ -14,6 +14,7 @@ namespace BGA.Entites
         {
 
             //optionsBuilder.UseSqlServer("Server = PLKWIM0SQLV02B\\ENG; Database = TE_CPK; Integrated Security = True; User ID = JABIL\\kozlowsk");
+            //optionsBuilder.UseSqlServer("Server = PLKWIM0SQLV02B\\ENG; Database = TE_CPK; Integrated Security = True; User ID = JABIL\\Neumann");
 
             //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Bga;Trusted_Connection=True");
             optionsBuilder.UseSqlServer("Server = PLKWIM0SQLV02B\\ENG; Database = TE_CPK; Integrated Security = True; User ID = JABIL\\smckwi_bgaprd$");

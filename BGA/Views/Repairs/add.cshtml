@@ -112,6 +112,14 @@
                                 <input asp-for="SerialNumber" class="form-control" id="serialNumber" required />
                                 <span asp-validation-for="SerialNumber" class="text-danger"></span>
                             </div>
+                            <div class="form-group" style="display: none;">
+                                <input type="hidden" asp-for="Pass" value="-" />
+                                <span asp-validation-for="Pass" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="display: none;">
+                                <input type="hidden" asp-for="Fail" value="-" />
+                                <span asp-validation-for="Fail" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
                 </form>
