@@ -93,9 +93,12 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - TE Team -
+            &copy; <span id="currentYear"></span> - TE Team -
         </div>
     </footer>
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
