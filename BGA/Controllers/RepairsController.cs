@@ -127,54 +127,13 @@ namespace BGA.Controllers
             return View();
         }
 
-        /*       // POST: Repairs/Create
-               [HttpPost]
-               [ValidateAntiForgeryToken]
-               public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,Pass,Fail")] Repair repair)
-               {
-                   if (ModelState.IsValid)
-                   {
-                       // Sprawdzenie, czy suma napraw nie przekracza 8
-                       if (!CountRepairs(repair))
-                       {
-                           repair.LocalDate = DateTime.Now;
-
-                           _context.Add(repair);
-                           await _context.SaveChangesAsync();
-                           return RedirectToAction(nameof(Index));
-                       }
-                       else
-                       {
-                           ModelState.AddModelError(string.Empty, "Suma napraw dla danego numeru seryjnego przekracza 8.");
-                           throw new Exception("Suma napraw dla danego numeru seryjnego przekracza 8."); // Rzucenie wyjątku
-                       }
-                   }
-                   return View(repair);
-               }*/
-
-
-        // Słownik przechowujący czas ostatniego dodania rekordu dla danego numeru seryjnego
-        private static readonly Dictionary<string, DateTime> _ostatnieDodania = new Dictionary<string, DateTime>();
-
+        // POST: Repairs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SerialNumber,Name,Analysis,Comment,LocationComponent,Defect,Client,TesterProcess,Machine,RepairMethod,Pass,Fail")] Repair repair)
         {
             if (ModelState.IsValid)
             {
-                lock (_ostatnieDodania)
-                {
-                    if (_ostatnieDodania.TryGetValue(repair.SerialNumber, out DateTime ostatnieDodanie))
-                    {
-                        if ((DateTime.Now - ostatnieDodanie).TotalSeconds < 5)
-                        {
-                            ModelState.AddModelError(string.Empty, "Odczekaj 5 sekund przed ponownym dodaniem rekordu dla tego numeru seryjnego.");
-                            return View(repair);
-                        }
-                    }
-                    _ostatnieDodania[repair.SerialNumber] = DateTime.Now;
-                }
-
                 // Sprawdzenie, czy suma napraw nie przekracza 8
                 if (!CountRepairs(repair))
                 {
@@ -187,17 +146,11 @@ namespace BGA.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Suma napraw dla danego numeru seryjnego przekracza 8.");
-                    return View(repair);
+                    throw new Exception("Suma napraw dla danego numeru seryjnego przekracza 8."); // Rzucenie wyjątku
                 }
             }
             return View(repair);
         }
-
-
-
-
-
-
 
 
         // Metoda do zliczania napraw dla danego numeru seryjnego
