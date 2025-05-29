@@ -29,7 +29,8 @@ namespace BGA.Controllers
         {
             if (ModelState.IsValid)
             {
-                repair.LocalDate = DateTime.Now;
+                /*repair.LocalDate = DateTime.Now;*/
+                //repair.LocalDate = DateTime.UtcNow;
 
                 _context.Add(repair);
                 await _context.SaveChangesAsync();
@@ -137,7 +138,8 @@ namespace BGA.Controllers
                 // Sprawdzenie, czy suma napraw nie przekracza 8
                 if (!CountRepairs(repair))
                 {
-                    repair.LocalDate = DateTime.Now;
+                    /*repair.LocalDate = DateTime.Now;*/
+                    //repair.LocalDate = DateTime.UtcNow;
 
                     _context.Add(repair);
                     await _context.SaveChangesAsync();

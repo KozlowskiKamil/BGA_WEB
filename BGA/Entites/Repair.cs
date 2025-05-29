@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BGA.Entites
 {
@@ -28,8 +29,8 @@ namespace BGA.Entites
         public string Pass { get; set; }
         public string Fail { get; set; }
 
-
-        [DataType(DataType.Date)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LocalDate { get; set; }
+
     }
 }
